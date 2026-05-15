@@ -1,0 +1,341 @@
+{
+	"info": {
+		"_postman_id": "trello-hw-collection-001",
+		"name": "GoIT Trello Homework — Practice 4 Postman",
+		"description": "Готовая коллекция для домашнего задания GoIT QA: 8 запросов к Trello API с тестами. Перед использованием подключи Environment \"Trello HW Environment\" и впиши свои apiKey и apiToken.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Task 1 — Create a Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 1500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1500);",
+							"});",
+							"",
+							"pm.test(\"'id' is a string\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.be.a('string');",
+							"});",
+							"",
+							"// Сохраняем ID доски в переменную окружения для следующих запросов",
+							"const jsonData = pm.response.json();",
+							"pm.environment.set(\"boardId\", jsonData.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/?name=MyHomeworkBoard&key={{apiKey}}&token={{apiToken}}",
+					"protocol": "https",
+					"host": ["api", "trello", "com"],
+					"path": ["1", "boards", ""],
+					"query": [
+						{ "key": "name", "value": "MyHomeworkBoard" },
+						{ "key": "key", "value": "{{apiKey}}" },
+						{ "key": "token", "value": "{{apiToken}}" }
+					]
+				}
+			}
+		},
+		{
+			"name": "Task 2 — Create Left List (pos=top, name=Left)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 1500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1500);",
+							"});",
+							"",
+							"pm.test(\"'name' is a string\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.be.a('string');",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.environment.set(\"leftListId\", jsonData.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists?name=Left&idBoard={{boardId}}&pos=top&key={{apiKey}}&token={{apiToken}}",
+					"protocol": "https",
+					"host": ["api", "trello", "com"],
+					"path": ["1", "lists"],
+					"query": [
+						{ "key": "name", "value": "Left" },
+						{ "key": "idBoard", "value": "{{boardId}}" },
+						{ "key": "pos", "value": "top" },
+						{ "key": "key", "value": "{{apiKey}}" },
+						{ "key": "token", "value": "{{apiToken}}" }
+					]
+				}
+			}
+		},
+		{
+			"name": "Task 3 — Create Right List (pos=bottom, name=Right)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 1500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1500);",
+							"});",
+							"",
+							"pm.test(\"'name' is a string\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.be.a('string');",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.environment.set(\"rightListId\", jsonData.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists?name=Right&idBoard={{boardId}}&pos=bottom&key={{apiKey}}&token={{apiToken}}",
+					"protocol": "https",
+					"host": ["api", "trello", "com"],
+					"path": ["1", "lists"],
+					"query": [
+						{ "key": "name", "value": "Right" },
+						{ "key": "idBoard", "value": "{{boardId}}" },
+						{ "key": "pos", "value": "bottom" },
+						{ "key": "key", "value": "{{apiKey}}" },
+						{ "key": "token", "value": "{{apiToken}}" }
+					]
+				}
+			}
+		},
+		{
+			"name": "Task 4 — Create Card in Left List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 1500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1500);",
+							"});",
+							"",
+							"pm.test(\"'id' is a string\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.be.a('string');",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.environment.set(\"leftCardId\", jsonData.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/cards?idList={{leftListId}}&name=Left Card&key={{apiKey}}&token={{apiToken}}",
+					"protocol": "https",
+					"host": ["api", "trello", "com"],
+					"path": ["1", "cards"],
+					"query": [
+						{ "key": "idList", "value": "{{leftListId}}" },
+						{ "key": "name", "value": "Left Card" },
+						{ "key": "key", "value": "{{apiKey}}" },
+						{ "key": "token", "value": "{{apiToken}}" }
+					]
+				}
+			}
+		},
+		{
+			"name": "Task 5 — Create Card in Right List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 1500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1500);",
+							"});",
+							"",
+							"pm.test(\"'id' is a string\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.be.a('string');",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.environment.set(\"rightCardId\", jsonData.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/cards?idList={{rightListId}}&name=Right Card&key={{apiKey}}&token={{apiToken}}",
+					"protocol": "https",
+					"host": ["api", "trello", "com"],
+					"path": ["1", "cards"],
+					"query": [
+						{ "key": "idList", "value": "{{rightListId}}" },
+						{ "key": "name", "value": "Right Card" },
+						{ "key": "key", "value": "{{apiKey}}" },
+						{ "key": "token", "value": "{{apiToken}}" }
+					]
+				}
+			}
+		},
+		{
+			"name": "Task 6 — Delete a Card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 1500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1500);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/cards/{{leftCardId}}?key={{apiKey}}&token={{apiToken}}",
+					"protocol": "https",
+					"host": ["api", "trello", "com"],
+					"path": ["1", "cards", "{{leftCardId}}"],
+					"query": [
+						{ "key": "key", "value": "{{apiKey}}" },
+						{ "key": "token", "value": "{{apiToken}}" }
+					]
+				}
+			}
+		},
+		{
+			"name": "Task 7 — Get Cards on a Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 1500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1500);",
+							"});",
+							"",
+							"pm.test(\"Response is an array\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an('array');",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/{{boardId}}/cards?key={{apiKey}}&token={{apiToken}}",
+					"protocol": "https",
+					"host": ["api", "trello", "com"],
+					"path": ["1", "boards", "{{boardId}}", "cards"],
+					"query": [
+						{ "key": "key", "value": "{{apiKey}}" },
+						{ "key": "token", "value": "{{apiToken}}" }
+					]
+				}
+			}
+		},
+		{
+			"name": "Task 8 — Update a Board (name + desc)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 1500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1500);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/{{boardId}}?name=UpdatedBoardName&desc=This is my updated homework board&key={{apiKey}}&token={{apiToken}}",
+					"protocol": "https",
+					"host": ["api", "trello", "com"],
+					"path": ["1", "boards", "{{boardId}}"],
+					"query": [
+						{ "key": "name", "value": "UpdatedBoardName" },
+						{ "key": "desc", "value": "This is my updated homework board" },
+						{ "key": "key", "value": "{{apiKey}}" },
+						{ "key": "token", "value": "{{apiToken}}" }
+					]
+				}
+			}
+		}
+	]
+}

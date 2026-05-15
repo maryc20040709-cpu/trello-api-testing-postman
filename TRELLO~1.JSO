@@ -1,0 +1,49 @@
+{
+	"id": "trello-hw-env-001",
+	"name": "Trello HW Environment",
+	"values": [
+		{
+			"key": "apiKey",
+			"value": "PASTE_YOUR_KEY_HERE",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "apiToken",
+			"value": "PASTE_YOUR_TOKEN_HERE",
+			"type": "secret",
+			"enabled": true
+		},
+		{
+			"key": "boardId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "leftListId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "rightListId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "leftCardId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "rightCardId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment"
+}
